@@ -23,6 +23,10 @@ function whackamole() {
     window.location.href = "whackamole.html"; // Redirects to the profile page
   }
 
+function mazemania() {
+    window.location.href = "maze.html"; // Redirects to the profile page
+  }
+
 window.addEventListener("mouseover", initLandbot, { once: true });
 window.addEventListener("touchstart", initLandbot, { once: true });
 var myLandbot;
