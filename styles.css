@@ -1,0 +1,181 @@
+* { margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#cae4fd ;
+    width: 100%;
+    height: 25vh;
+    position: relative;
+}
+
+nav{
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-options{
+    display: flex;
+    align-items: center;
+    
+}
+
+.profile{
+    margin-right: 20px;
+    cursor: pointer;
+}
+.options{
+    
+    margin-right: 80px;
+    position: relative;
+    z-index: 20;
+}
+
+
+.options-button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+.main{
+    width: 100vw;
+    height: 75vh;
+    background-image: url(assets/background-grass.png);
+    
+}
+
+.bluebox{
+    z-index: 10;
+    background-color: #12baf0;
+    width: 80vw;
+    height: 82vh;
+    position: fixed;
+    bottom: 0;
+    left: 140px;
+    box-shadow: black;
+}
+
+.search-logo{
+    position: relative;
+    top: -75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 300px;
+}
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+    width: 240px;
+    height: 40px;
+    left: 900px;
+    border: 2px solid black;
+    border-radius: 36px;
+    background-color: white;
+    color: black;
+}
+
+
+.search-input{
+ background-color: transparent;
+ border: none;   
+ outline: none
+}
+
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.game-card {
+    background: #fde047;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+}
+
+.game-icon {
+    width: 100%;
+    height: 150px;
+    background: transparent;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-title {
+    color: #1e40af;
+    font-weight: bold;
+}
+
+
+.chat-bot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
