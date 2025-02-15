@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Mole</title>
+    <link rel="stylesheet" href="mole.css">
+    <script defer src="mole.js"></script>
+</head>
+<body>
+    <h1>Whack-a-Mole</h1>
+    <h3>Hit the mole, avoid the cactus</h3>
+
+    <div class="container">
+        <h2>Your Score: <span id="score">0</span></h2>
+        <button id="restart">Restart Game</button>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="Spring-Flowers(chosic.com).mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="hit-sound" preload="auto">
+        <source src="whack01-105535.mp3" type="audio/mp3">
+    </audio>
+    
+    <audio id="gameover-sound" preload="auto">
+        <source src="videogame-death-sound-43894.mp3" type="audio/mp3">
+    </audio>    
+
+    <div id="board"></div>
+
+    <!-- Score History Section -->
+    <div id="score-history"></div>
+
+    <script>
+        document.getElementById("restart").addEventListener("click", function() {
+            score = 0;
+            gameOver = false;
+            document.getElementById("score").innerText = score.toString();
+            
+            if (currMoleTile) currMoleTile.innerHTML = "";
+            if (currPlantTile) currPlantTile.innerHTML = "";
+            
+            currMoleTile = null;
+            currPlantTile = null;
+
+            setGame();
+        });
+    </script>
+</body>
+</html>
