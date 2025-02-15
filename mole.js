@@ -106,6 +106,26 @@ function showMotivationalMessage(score) {
     }
 }
 
+function restartGame() {
+    // Reset game variables
+    score = 0;
+    gameOver = false;
+    currMoleTile = null;
+    currPlantTile = null;
+    lastMoleTile = null;
+    lastPlantTile = null;
+
+    // Reset UI elements
+    document.getElementById("score").innerText = "0";
+
+    // Clear the board to prevent duplication
+    let board = document.getElementById("board");
+    board.innerHTML = ""; // 🔥 Removes all previous tiles
+
+    // Reinitialize the game
+    setGame();
+}
+
 
 function selectTile() {
     if (gameOver) return;
