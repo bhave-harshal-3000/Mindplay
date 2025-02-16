@@ -66,3 +66,60 @@ body {
 h3{
     margin: 0;
 }
+
+/* Responsive for tablets and smaller screens */
+@media (max-width: 768px) {
+    #board {
+        width: 360px;
+        height: 360px;
+        border-radius: 15px;
+    }
+
+    #board div {
+        width: 120px;
+        height: 120px;
+    }
+
+    #board div img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .motivational-message {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+}
+
+/* Responsive for mobile screens */
+@media (max-width: 480px) {
+    body {
+        background-size: contain;
+        overflow-x: hidden;
+    }
+
+    #board {
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+    }
+
+    #board div {
+        width: 100px;
+        height: 100px;
+    }
+
+    #board div img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .motivational-message {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+}

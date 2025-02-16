@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<!-- Previous head and style sections remain the same -->
+<head>
+    <title>Pattern Panic!</title>
+    <style>
+        /* All previous styles remain exactly the same */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .game-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        #current-card {
+            font-size: 100px;
+            margin: 20px 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .instructions {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+
+        #restart-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        #restart-btn:hover {
+            background-color: #45a049;
+        }
+
+        .score-history {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .score-history h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .score-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .score-list li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .score-list li:last-child {
+            border-bottom: none;
+        }
+
+        .current-time {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* Keep your existing desktop styles unchanged */
+
+@media (max-width: 768px) {
+    .game-box {
+        width: 95%;
+        padding: 15px;
+    }
+
+    #current-card {
+        font-size: 80px; /* Reduce card size for smaller screens */
+    }
+
+    .stats {
+        flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    #current-card {
+        font-size: 60px; /* Further reduce size for mobile */
+    }
+
+    #restart-btn {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .instructions {
+        font-size: 14px;
+    }
+
+    .score-history {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .score-list li {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Previous HTML structure remains exactly the same -->
+    <div class="game-box">
+        <h1>Pattern Panic!</h1>
+        
+        <div class="current-time" id="current-time"></div>
+        
+        <div class="instructions">
+            <p>Press → (right arrow) if symbols match</p>
+            <p>Press ← (left arrow) if symbols don't match</p>
+        </div>
+
+        <div id="current-card">★</div>
+
+        <div class="stats">
+            <div>Score: <span id="score">0</span></div>
+            <div>Time: <span id="timer">30</span>s</div>
+        </div>
+
+        <button id="restart-btn">Restart Game</button>
+
+        <div class="score-history">
+            <h2>Previous Scores</h2>
+            <ul id="score-list" class="score-list">
+            </ul>
+        </div>
+        <audio id="bg-music" loop>
+            <source src="Spring-Flowers(chosic.com).mp3" type="audio/mpeg">
+        </audio>
+        <audio id="left-sound">
+            <source src="click.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="right-sound">
+            <source src="click.mp3" type="audio/mpeg">
+        </audio>
+        </div>
+
+    <script>
+        let currentCard = document.getElementById("current-card");
+        let scoreDisplay = document.getElementById("score");
+        let timerDisplay = document.getElementById("timer");
+        let restartBtn = document.getElementById("restart-btn");
+        let scoreList = document.getElementById("score-list");
+        let currentTimeDisplay = document.getElementById("current-time");
+        let score = 0;
+        let timer = 30;
+        let gameInterval;
+        let isGameRunning = false;
+        let previousSymbol = null;
+        let isKeyPressed = false;
+        const symbols = ["★", "●", "▲", "■", "♥", "♦", "♣", "♠"];
+
+
+        // Get audio elements
+let bgMusic = document.getElementById("bg-music");
+let leftSound = document.getElementById("left-sound");
+let rightSound = document.getElementById("right-sound");
+
+function playBackgroundMusic() {
+    if (bgMusic.paused) {
+        bgMusic.volume = 1; // Adjust volume (0.0 - 1.0)
+        bgMusic.play().then(() => console.log("Background music playing! 🎵"))
+                      .catch(error => console.log("Autoplay blocked: " + error));
+    }
+}
+
+// Start background music when the user first interacts with the page
+document.addEventListener("click", playBackgroundMusic, { once: true });
+
+window.onload = function () {
+    setTimeout(() => {
+        loadScores();
+        startGame();
+    }, 500);
+};
+
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+        leftSound.currentTime = 0; // Restart sound
+        leftSound.play();
+        checkMatch(false);
+    } else if (event.key === "ArrowRight") {
+        rightSound.currentTime = 0;
+        rightSound.play();
+        checkMatch(true);
+    }
+});
+
+
+        function updateCurrentTime() {
+            const now = new Date();
+            currentTimeDisplay.textContent = `Current Time: ${now.toLocaleString()}`;
+        }
+
+        setInterval(updateCurrentTime, 1000);
+        updateCurrentTime();
+
+        function loadScores() {
+            const scores = JSON.parse(localStorage.getItem('gameScores')) || [];
+            scoreList.innerHTML = '';
+            scores.slice(-5).reverse().forEach(scoreData => {
+                const li = document.createElement('li');
+                li.textContent = `Score: ${scoreData.score} - ${new Date(scoreData.timestamp).toLocaleString()}`;
+                scoreList.appendChild(li);
+            });
+        }
+
+        function saveScore(newScore) {
+            const scores = JSON.parse(localStorage.getItem('gameScores')) || [];
+            scores.push({
+                score: newScore,
+                timestamp: new Date().toISOString()
+            });
+            while (scores.length > 5) {
+                scores.shift();
+            }
+            localStorage.setItem('gameScores', JSON.stringify(scores));
+            loadScores();
+        }
+
+        // Modified to create balanced probability
+        function updateCard() {
+            // 50% chance of showing the same symbol
+            const shouldMatch = Math.random() < 0.5;
+            
+            if (shouldMatch && previousSymbol) {
+                // Show the same symbol
+                currentCard.textContent = previousSymbol;
+                return previousSymbol;
+            } else {
+                // Show a different symbol
+                let availableSymbols = symbols.filter(symbol => symbol !== previousSymbol);
+                let newSymbol = availableSymbols[Math.floor(Math.random() * availableSymbols.length)];
+                currentCard.textContent = newSymbol;
+                return newSymbol;
+            }
+        }
+
+        function startGame() {
+            if (isGameRunning) return;
+            isGameRunning = true;
+            score = 0;
+            timer = 30;
+            scoreDisplay.textContent = score;
+            timerDisplay.textContent = timer;
+            // Get random first symbol
+            previousSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+            currentCard.textContent = previousSymbol;
+            
+            gameInterval = setInterval(() => {
+                timer--;
+                timerDisplay.textContent = timer;
+                if (timer <= 0) endGame();
+            }, 1000);
+        }
+
+        function endGame() {
+            clearInterval(gameInterval);
+            isGameRunning = false;
+            alert(`Game Over! Your score is ${score}`);
+            saveScore(score);
+        }
+
+        function checkMatch(isMatchKey) {
+            if (!isGameRunning || isKeyPressed) return;
+            
+            const currentSymbol = currentCard.textContent;
+            
+            if ((isMatchKey && previousSymbol === currentSymbol) || 
+                (!isMatchKey && previousSymbol !== currentSymbol)) {
+                score++;
+            } else {
+                score = Math.max(0, score - 1);
+            }
+            
+            scoreDisplay.textContent = score;
+            previousSymbol = currentSymbol;
+            updateCard();
+            isKeyPressed = true;
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                checkMatch(false);
+            } else if (event.key === "ArrowRight") {
+                checkMatch(true);
+            }
+        });
+
+        document.addEventListener("keyup", () => {
+            isKeyPressed = false;
+        });
+
+        restartBtn.addEventListener("click", startGame);
+
+        loadScores();
+        startGame();
+    </script>
+</body>
+</html>

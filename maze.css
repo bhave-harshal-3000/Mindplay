@@ -78,3 +78,77 @@ canvas {
     0% { opacity: 1; }
     100% { opacity: 0; }
 }
+
+/* Responsive for tablets and smaller screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .maze-container {
+        padding: 15px;
+    }
+
+    canvas {
+        width: 90%;
+        max-width: 400px;
+        border-width: 3px;
+    }
+
+    #messageBox {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* Responsive for mobile screens */
+@media (max-width: 480px) {
+    body {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .container {
+        width: 95%;
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .maze-container {
+        padding: 10px;
+    }
+
+    canvas {
+        width: 100%;
+        max-width: 300px;
+        border-width: 2px;
+    }
+
+    #messageBox {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        top: 5px;
+        right: 5px;
+    }
+}

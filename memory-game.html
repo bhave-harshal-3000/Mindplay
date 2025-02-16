@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card Game</title>
+    <link rel="stylesheet" href="memory-game.css">
+</head>
+<body>
+    <h1>Memory Card Game</h1>
+    <p>Moves: <span id="moves">0</span></p>
+
+    <div class="game-container">
+        <div id="game-board"></div>
+    </div>
+
+    <div id="score-history-container">
+        <h3>Score History</h3>
+        <div id="score-history"></div>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="Spring-Flowers(chosic.com).mp3" type="audio/mp3">
+    </audio>
+
+<div id="motivation-message"></div>
+
+<div id="win-message"></div>
+
+
+    
+    <button id="restart">Restart Game</button>
+    <script src="memory-game.js"></script>
+</body>
+</html>

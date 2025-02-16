@@ -1,0 +1,201 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom, #add8e6, #f8f9fa);
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 15px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+
+.card.flipped {
+    background-color: white;
+    transform: scale(1.1);
+}
+
+
+#restart {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* 🎯 Make Score History Section Visible */
+#score-history-container {
+    margin-top: 20px;
+    padding: 15px;
+    width: 90%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* 🏆 Style Score History List */
+#score-history {
+    max-height: 150px;
+    overflow-y: auto; /* Enable scrolling if there are many scores */
+    padding: 10px;
+}
+
+#score-history h3 {
+    color: #333;
+}
+
+#score-history p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+    background: #f1f1f1;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* 🎯 Motivational Message Styling */
+#motivation-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    display: none;
+    z-index: 1000;
+    animation: fadeInOut 2s ease-in-out;
+}
+/* 🎉 Winning Message Styling */
+#win-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+    z-index: 1000;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+/* 🔄 Fade Animation for Winning Message */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: scale(0.9); }
+    20% { opacity: 1; transform: scale(1); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: scale(0.9); }
+}
+
+
+/* 🔄 Animation for Message */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    20% { opacity: 1; transform: translateY(0px); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+
+/* 📱 Responsive Design */
+@media (max-width: 600px) {
+    #game-board {
+        grid-template-columns: repeat(3, 80px);
+    }
+    .card {
+        width: 80px;
+        height: 80px;
+        font-size: 24px;
+    }
+}
+
+/* 📱 Responsive for Tablets */
+@media (max-width: 768px) {
+    #game-board {
+        grid-template-columns: repeat(3, 90px);
+        gap: 10px;
+    }
+    
+    .card {
+        width: 90px;
+        height: 90px;
+        font-size: 28px;
+    }
+
+    #restart {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    #win-message, #motivation-message {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+}
+
+/* 📱 Mobile Screens */
+@media (max-width: 480px) {
+    #game-board {
+        display: grid;
+        grid-template-columns: repeat(3, 100px); /* 3 columns per row */
+        gap: 15px;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+
+    .card {
+        width: 75px;
+        height: 75px;
+        font-size: 22px;
+    }
+
+    #restart {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    #score-history-container {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    #win-message, #motivation-message {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}

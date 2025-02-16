@@ -15,17 +15,6 @@ window.onclick = function (event) {
   }
 };
 
-function profile() {
-  window.location.href = "profile-page.html"; // Redirects to the profile page
-}
-
-function whackamole() {
-    window.location.href = "whackamole.html"; // Redirects to the profile page
-  }
-
-function mazemania() {
-    window.location.href = "maze.html"; // Redirects to the profile page
-  }
 
 window.addEventListener("mouseover", initLandbot, { once: true });
 window.addEventListener("touchstart", initLandbot, { once: true });
@@ -46,3 +35,21 @@ function initLandbot() {
     x.parentNode.insertBefore(s, x);
   }
 }
+
+function profile() {
+  window.location.href = "profile-page.html"; // Redirects to the profile page
+}
+
+function whackamole() {
+    window.location.href = "whackamole.html"; // Redirects to the profile page
+  }
+
+function mazemania() {
+    window.location.href = "maze.html"; // Redirects to the profile page
+  }
+function patternpanic() {
+    window.location.href = "patternpanic.html"; // Redirects to the profile page
+  }
+function memorygame(){
+    window.location.href = "memory-game.html"
+  }
