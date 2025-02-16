@@ -1,0 +1,138 @@
+:root {
+    --primary: #6C5CE7;
+    --accent: #FFD700;
+    --background: #1A1C2B;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f9f9f9;
+    color: black;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* User Profile */
+.profile-sidebar {
+    background: white;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    width: 0vw;
+}
+
+.user-profile {
+    text-align: center;
+}
+
+.profile-pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+    width: 97vw;
+}
+
+/* LPI Container */
+.lpi-container {
+    background: var(--primary);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.lpi-container h2{
+    margin: 2px;
+}
+.lpi-score {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+/* Stat Card */
+.stat-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 95vw;
+    height: 66vh;
+}
+
+.progress-container {
+    height: 5px;
+    background: #ddd;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.5s ease-in-out;
+    width: 0%;  /* Ensure bars start from 0% */
+}
+
+/* Chart */
+canvas {
+    width: 95vw !important;
+    height: 54vh !important;
+}
+
+/* RESPONSIVE DESIGN for smaller screens */
+@media (max-width: 600px) {
+    /* Reduce overall container sizes and font sizes */
+    .profile-pic {
+        width: 50px;
+        height: 50px;
+    }
+    .main-content {
+        padding: 15px;
+        width: 100vw;
+    }
+    .lpi-container {
+        padding: 10px;
+    }
+    .lpi-score {
+        font-size: 2em;
+    }
+    .stat-card {
+        width: 90vw;
+        height: 50vh;
+    }
+    canvas {
+        width: 90vw !important;
+        height: 40vh !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+    }
+    .lpi-container {
+        padding: 8px;
+    }
+    .lpi-score {
+        font-size: 1.8em;
+    }
+    .stat-card {
+        width: 85vw;
+        height: 45vh;
+    }
+    canvas {
+        width: 85vw !important;
+        height: 35vh !important;
+    }
+}

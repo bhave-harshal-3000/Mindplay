@@ -52,6 +52,7 @@ nav{
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+    padding-bottom: 5px;
 }
 
 .dropdown-content {
@@ -173,7 +174,7 @@ nav{
     bottom: 20px;
     right: 25px;
     background: white;
-    border-radius: 0%;
+    border-radius: 90%;
     width: 60px;
     height: 60px;
     display: flex;

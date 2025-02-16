@@ -33,7 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    localStorage.setItem("loginuser", email);
+    
     window.location.href="index.html"
+
     // ...
   })
   .catch((error) => {

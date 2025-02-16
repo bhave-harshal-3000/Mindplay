@@ -1,7 +1,8 @@
+/* Base Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradient background */
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,26 +13,33 @@ body {
     color: white;
 }
 
+/* Container */
 .container {
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white container */
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
-    border-radius: 20px; /* Rounded corners */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     position: relative;
+    width: 90%;
+    max-width: 800px; /* Prevents it from getting too wide */
 }
 
-h1 {
-    margin-bottom: 20px;
-    font-size: 2.5rem;
+/* Header */
+h4 {
+    margin-bottom: 0px;
+    font-size: 1.5rem;
     color: white;
+    padding-top: 3px;
+    margin-top: 0px;
 }
 
+/* Buttons */
 button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
     border: none;
-    border-radius: 10px; /* Rounded button */
+    border-radius: 10px;
     background-color: #28a745;
     color: white;
     cursor: pointer;
@@ -43,24 +51,34 @@ button:hover {
 }
 
 button i {
-    margin-right: 8px;
+    margin-right: 5px;
 }
 
+/* Maze Container */
 .maze-container {
-    background-color: rgba(255, 255, 255, 0.8); /* Light background for maze */
-    border-radius: 15px; /* Rounded corners */
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
 }
 
+/* Canvas (Maze) */
 canvas {
     border: 5px solid #333;
     background-color: white;
-    border-radius: 10px; /* Rounded corners for canvas */
+    border-radius: 10px;
+    width: 100%;
+    height: auto; /* Makes the height adjust dynamically */
+    max-width: 600px; /* Prevents it from getting too large */
 }
 
-/* Message box styles */
+/* Message Box */
 #messageBox {
     position: absolute;
     top: 20px;
@@ -70,69 +88,35 @@ canvas {
     padding: 10px 20px;
     border-radius: 10px;
     font-size: 1rem;
-    display: none; /* Hidden by default */
+    display: none;
     animation: fadeOut 3s ease-in-out;
 }
 
+/* Fade-out animation */
 @keyframes fadeOut {
     0% { opacity: 1; }
     100% { opacity: 0; }
 }
 
-/* Responsive for tablets and smaller screens */
+/* Responsive Styles */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    .container {
-        width: 90%;
-        padding: 15px;
-    }
-
-    button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-
-    .maze-container {
-        padding: 15px;
-    }
-
-    canvas {
-        width: 90%;
-        max-width: 400px;
-        border-width: 3px;
-    }
-
-    #messageBox {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-        top: 10px;
-        right: 10px;
-    }
-}
-
-/* Responsive for mobile screens */
-@media (max-width: 480px) {
     body {
         height: auto;
-        padding: 20px 0;
-    }
-
-    h1 {
-        font-size: 1.8rem;
+        padding: 20px;
     }
 
     .container {
         width: 95%;
-        padding: 10px;
-        border-radius: 15px;
+        padding: 15px;
+    }
+
+    h4 {
+        font-size: 1.2rem;
     }
 
     button {
-        font-size: 12px;
-        padding: 6px 12px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
     }
 
     .maze-container {
@@ -140,15 +124,32 @@ canvas {
     }
 
     canvas {
-        width: 100%;
-        max-width: 300px;
-        border-width: 2px;
+        max-width: 100%;
     }
 
     #messageBox {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-        top: 5px;
-        right: 5px;
+        top: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h4 {
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 7px 10px;
+        font-size: 0.85rem;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .maze-container {
+        margin-top: 5px;
     }
 }

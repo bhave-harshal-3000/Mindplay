@@ -18,6 +18,7 @@
     .main-container {
       display: flex;
       min-height: 100vh;
+      justify-content: center;
     }
     
     /* Left column: Profile Container (25% width) */
@@ -102,13 +103,9 @@
       <img id="profile-pic" src="" alt="Profile Picture">
       <h2 id="profile-name"></h2>
       <h3 id="profile-email"></h3>
-      <button onclick="logout()">Sign Out</button>
+      <button id="logout" onclick="logout()">Sign Out</button>
     </div>
-    <!-- Right Column: Additional Content -->
-    <div class="right-container">
-      <h2>Progress Tracking</h2>
-      <h4>Every step forward is a victory—see your progress, celebrate your growth.</h4>
-    </div>
+    
   </div>
   <script src="profile.js"></script>
   

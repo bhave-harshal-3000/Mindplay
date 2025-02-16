@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Signed up 
         const user = userCredential.user;
         alert("Creating Account...")
+        localStorage.setItem("loginuser", email);
+        localStorage.setItem("loginemail", password);
         window.location.href="index.html"
         // ...
       })

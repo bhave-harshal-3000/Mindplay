@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
@@ -8,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const tileSize = 40;
     let startTime, endTime;
     let totalMoves = 0, validMoves = 0, wrongMoves = 0;
+    let gameStarted = false;
 
     let maze = generateRandomMaze(15, 15);
-
     const player = { x: 1, y: 1 };
     const goal = { x: maze[0].length - 2, y: maze.length - 2 };
 
@@ -42,11 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         carvePath(1, 1);
-        
-        // ✅ Fix: Ensure the goal is reachable by forcing an open path
-        maze[rows - 3][cols - 2] = 0; // Open path to goal
-        maze[rows - 2][cols - 2] = 0; // Ensure goal is open
-
+        maze[rows - 3][cols - 2] = 0;
+        maze[rows - 2][cols - 2] = 0;
         return maze;
     }
 
@@ -68,11 +67,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function showWinPopup(time) {
-        alert(`You completed the maze in ${time} seconds! 🎉`); // ✅ Use backticks for template literals
-        if (winSound) winSound.play(); // ✅ Check if winSound is defined before playing
+        alert(`You completed the maze in ${time} seconds! 🎉`);
+        winSound.play();
     }
-    
+
     document.addEventListener("keydown", (event) => {
+        if (!gameStarted) return;
+
         let newX = player.x, newY = player.y;
         totalMoves++;
 
@@ -94,25 +95,22 @@ document.addEventListener("DOMContentLoaded", function () {
             endTime = Date.now();
             const timeTaken = ((endTime - startTime) / 1000).toFixed(2);
             showWinPopup(timeTaken);
-            saveScore();
+            saveScore(timeTaken);
         }
 
         draw();
     });
 
-    function saveScore() {
-        let speed = ((endTime - startTime) / 1000).toFixed(2);
-        let attention = ((validMoves / totalMoves) * 100).toFixed(2);
-        let memory = ((1 - (wrongMoves / totalMoves)) * 100).toFixed(2);
-        let problemSolving = (100 - (speed * 5)).toFixed(2);
+    function saveScore(timeTaken) {
+        let problemSolving = (100 - (timeTaken * 5)).toFixed(2);
         if (problemSolving < 0) problemSolving = 0;
 
-        fetch("http://localhost:3000/save-score", {
+        fetch("http://localhost:5500/api/score", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ speed, attention, memory, problemSolving })
+            body: JSON.stringify({ problemSolving: parseFloat(problemSolving) })
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(() => console.log("Score saved successfully!"))
         .catch(error => console.error("Error:", error));
     }
@@ -132,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
         totalMoves = 0;
         validMoves = 0;
         wrongMoves = 0;
+        gameStarted = true;
         draw();
     };
 
